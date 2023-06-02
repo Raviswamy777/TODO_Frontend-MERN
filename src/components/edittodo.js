@@ -42,7 +42,7 @@ function EditTodo(){
         var url = window.location.href;
         id=url.substring(url.lastIndexOf('/')+1);
         axios.post(`https://todobackend-m12f.onrender.com/todos/update/${id}`, updatedTodo).then(res => console.log(res.data));
-        window.setTimeout(function(){window.location = "http://localhost:3000";},1000);
+        window.setTimeout(function(){window.location = "https://todofrontend-hkru.onrender.com/";},1000);
 
     }
 
