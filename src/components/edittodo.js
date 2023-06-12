@@ -7,6 +7,8 @@ function EditTodo(){
     const [responsible, setResponsible] = useState("");
     const [priority, setPriority] = useState("");
     const [completed, setCompleted] = useState(false);
+    
+    const [msg,setMsg]=useState("");
 
     var id ="";
     useEffect(()=>{
@@ -41,7 +43,11 @@ function EditTodo(){
 
         var url = window.location.href;
         id=url.substring(url.lastIndexOf('/')+1);
-        axios.post(`https://todobackend-m12f.onrender.com/todos/update/${id}`, updatedTodo).then(res => console.log(res.data));
+        axios.post(`https://todobackend-m12f.onrender.com/todos/update/${id}`, updatedTodo).then(res => {console.log(res.data);
+              setMsg("TODO Function Succefully Updated");                                                                                            
+         }).catch(function(err){
+            console.log(err);
+        });
         window.setTimeout(function(){window.location = "https://todofrontend-hkru.onrender.com/";},1000);
 
     }
@@ -63,6 +69,9 @@ function EditTodo(){
     return(
         <div>
             <h2 align="center">Edit Todo Item</h2>
+        {   msg &&
+                        <p className="fs-4 text-center text-success">{msg}</p>
+                    }  
             <form onSubmit={handleSubmit}>
                 <div className="form-group" >
                     <label>Description:</label>
