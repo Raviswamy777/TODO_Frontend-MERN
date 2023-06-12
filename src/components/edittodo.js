@@ -48,7 +48,7 @@ function EditTodo(){
          }).catch(function(err){
             console.log(err);
         });
-        window.setTimeout(function(){window.location = "https://todofrontend-hkru.onrender.com/";},1000);
+        window.setTimeout(function(){window.location = "https://todofrontend-hkru.onrender.com/";},3000);
 
     }
 
