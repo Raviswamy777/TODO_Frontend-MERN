@@ -11,14 +11,18 @@ import '../index.css';
 
 function TodoList(){
    
+   const [msg,setMsg]=useState("");
+   
     const Todo = props => {
         const {todo_completed} =props.todo;
         const handleDelete = () =>{
             console.log(props.todo._id);
             axios.post('https://todobackend-m12f.onrender.com/todos/delete/'+props.todo._id).then(response => {
                 console.log("item deleted");
+               setMsg("TODO Function Succefully Deleted");
                 axios.get("https://todobackend-m12f.onrender.com/todos/").then(response => {
                     setTodoItems(response.data);
+                   window.setTimeout(function(){window.location = "https://todofrontend-hkru.onrender.com/";},3000);
                 }).catch(function(err){
                     console.log(err);
                 })
@@ -63,6 +67,9 @@ function TodoList(){
     return(
         <div>
            <Link to="/" className="navbar-brand text-center" ><h2>TO-DO-LIST</h2></Link> 
+                             {   msg &&
+                        <p className="fs-4 text-center text-success">{msg}</p>
+                    }
             <table id="todo_items" className="table table-striped" style={{marginTop: 20}}>
                 <thead style ={{backgroundColor: '#FFA1A1'}}>
                     <tr>
