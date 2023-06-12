@@ -7,8 +7,8 @@ function CreateTodo(){
     const [responsible, setResponsible] = useState("");
     const [priority, setPriority] = useState("");
     const [completed, setCompleted] = useState(false);
-
     
+    const [msg,setMsg]=useState("");    
 
     const handleSubmit= (e) =>{
         e.preventDefault();
@@ -24,7 +24,11 @@ function CreateTodo(){
             todo_completed : completed
         }
 
-        axios.post('https://todobackend-m12f.onrender.com/todos/add', newTodo).then(res => console.log(res.data));
+        axios.post('https://todobackend-m12f.onrender.com/todos/add', newTodo).then(res => {console.log(res.data)
+        setMsg("TODO Function Added Succefully ");     
+         }).catch(function(err){
+        console.log(err);
+    });
 
         setDescription("");
         setResponsible("");
@@ -47,6 +51,9 @@ function CreateTodo(){
     return(
         <div>
             <h3>Create Todo list</h3>
+        {   msg &&
+                        <p className="fs-4 text-center text-success">{msg}</p>
+                    }  
             <form onSubmit={handleSubmit}>
                 <div className="form-group" >
                     <label>Description:</label>
